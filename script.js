@@ -1,39 +1,60 @@
 const object = ['rock', 'paper', 'scissors'];
 
-function computerPlay() {
-    return object[Math.floor(Math.random() * 3)]
-}
+function playRound(playerSelection) {
+        let computerWin = 0
+        let playerWin = 0
+        let computerSelection = object[Math.floor(Math.random() * 3)];
+        let playerImage = `images/${playerSelection}.PNG`
+        let computerImage = `images/${computerSelection}.PNG`
 
-function playerPlay() {
-    let playerSelection = prompt("choose your weapon!").toLowerCase();
-    while (!object.includes(playerSelection)) {
-        playerSelection = prompt("you wrote something stupid choose your weapon again!").toLowerCase();
+        if (playerSelection === computerSelection) {
+
+            const result = document.createElement('p')
+            result.textContent = `tie!!! ${computerSelection} vs ${playerSelection}`
+            battleLog.appendChild(result)
+        } else if (playerSelection === 'scissors' && computerSelection === 'paper' ||
+            playerSelection === 'paper' && computerSelection === 'rock' ||
+            playerSelection === 'rock' && computerSelection === 'scissors') {
+            playerWin++
+            const result = document.createElement('p')
+            result.textContent = `player wins!!! ${computerSelection} vs ${playerSelection}`
+
+            battleLog.appendChild(result)
+        } else {
+            computerWin++
+            const result = document.createElement('p')
+            result.textContent = `computer wins ${computerSelection} vs ${playerSelection}`
+
+            battleLog.appendChild(result)
+        }
+        playerChoice.setAttribute("src", playerImage)
+        computerChoice.setAttribute("src", computerImage)
     }
-    return playerSelection
-}
 
-function playRound(playerSelection, computerSelection) {
-    if (playerSelection === computerSelection) {
-        return `That's tie! ${playerSelection} vs ${computerSelection}`
-    } else if (playerSelection === 'scissors' && computerSelection === 'paper' ||
-        playerSelection === 'paper' && computerSelection === 'rock' ||
-        playerSelection === 'rock' && computerSelection === 'scissors') {
-        return `player wins! ${playerSelection} vs ${computerSelection}`
-    } else {
-        return `computer wins! ${playerSelection} vs ${computerSelection}`
-    }
-}
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let computerSelection = computerPlay();
-        let playerSelection = playerPlay();
-        console.log(playRound(playerSelection, computerSelection));
+const playerChoice = document.getElementById("playerChoice")
 
-    }
-}
+const computerChoice = document.getElementById("computerChoice")
 
-game();
+const battleLog = document.getElementById("battle_log")
+
+const rock = document.getElementById("ROCK")
+
+const paper = document.getElementById("PAPER")
+
+const scissors = document.getElementById("SCISSORS")
+
+rock.addEventListener('click', function () {
+    playRound('rock')
+})
+
+paper.addEventListener('click', function () {
+    playRound('paper')
+})
+
+scissors.addEventListener('click', function () {
+    playRound('scissors')
+})
 
 
 
