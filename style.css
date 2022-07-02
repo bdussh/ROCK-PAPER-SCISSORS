@@ -1,4 +1,5 @@
 body {
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,18 +18,21 @@ body {
     justify-content: center;
     align-items: center;
     gap: 7vw;
+    margin:30px 0px;
 }
 
 #button\ container{
     display: flex;
     justify-content: center;
     gap:7vw;
-    padding: 100px 0;
+    margin: 30px 0;
     width: 100px;
 }
 
 img {
     width: 15vw;
+    box-sizing: border-box;
+
 
 }
 
@@ -38,3 +42,4 @@ img {
     transform: scale(120%);
     transition-duration: 75ms;
 }
+

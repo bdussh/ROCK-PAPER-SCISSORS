@@ -1,35 +1,49 @@
 const object = ['rock', 'paper', 'scissors'];
+let computerWin = 0
+let playerWin = 0
+let Round = 1
 
 function playRound(playerSelection) {
-        let computerWin = 0
-        let playerWin = 0
-        let computerSelection = object[Math.floor(Math.random() * 3)];
+    let computerSelection = object[Math.floor(Math.random() * 3)];
+    if (computerWin < 3 && playerWin < 3) {
         let playerImage = `images/${playerSelection}.PNG`
         let computerImage = `images/${computerSelection}.PNG`
-
+        playerChoice.setAttribute("src", playerImage)
+        computerChoice.setAttribute("src", computerImage)
         if (playerSelection === computerSelection) {
 
             const result = document.createElement('p')
-            result.textContent = `tie!!! ${computerSelection} vs ${playerSelection}`
+            result.textContent = `round ${Round}: tie!!! ${computerSelection} vs ${playerSelection}`
             battleLog.appendChild(result)
         } else if (playerSelection === 'scissors' && computerSelection === 'paper' ||
             playerSelection === 'paper' && computerSelection === 'rock' ||
             playerSelection === 'rock' && computerSelection === 'scissors') {
             playerWin++
             const result = document.createElement('p')
-            result.textContent = `player wins!!! ${computerSelection} vs ${playerSelection}`
+            result.textContent = `round ${Round}: player wins!!! ${computerSelection} vs ${playerSelection}`
 
             battleLog.appendChild(result)
         } else {
             computerWin++
             const result = document.createElement('p')
-            result.textContent = `computer wins ${computerSelection} vs ${playerSelection}`
+            result.textContent = `round ${Round}: computer wins ${computerSelection} vs ${playerSelection}`
 
             battleLog.appendChild(result)
         }
-        playerChoice.setAttribute("src", playerImage)
-        computerChoice.setAttribute("src", computerImage)
+        Round++
+        if (computerWin ===3){
+            const result = document.createElement("h3")
+            result.textContent = `Game over!!! computer wins!!!`
+            battleLog.appendChild(result)
+        } else if (playerWin===3){
+            const result = document.createElement("h3")
+            result.textContent = `Game over!!! player wins!!!`
+            battleLog.appendChild(result)
+
+        }
     }
+
+}
 
 
 const playerChoice = document.getElementById("playerChoice")
